@@ -1,0 +1,4 @@
+name: CommandsLib
+version: ${project.version}
+main: cz.larkyy.commandslib.CommandsLib
+api-version: 1.13
