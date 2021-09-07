@@ -1,9 +1,7 @@
 package cz.larkyy.commandslib;
 
 import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
-import org.bukkit.command.defaults.BukkitCommand;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -62,7 +60,7 @@ public class CommandBuilder {
             CommandMap commandMap = (CommandMap) field.get(Bukkit.getServer());
 
             command.setAliases(aliases);
-            ((BukkitCommand) command).setPermission(permission);
+            command.setPermission(permission);
 
             commandMap.register(this.command, command);
         } catch (Exception e) {

@@ -4,6 +4,7 @@ import cz.larkyy.commandslib.events.CustomCommandEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.defaults.BukkitCommand;
+import org.bukkit.entity.Player;
 
 import java.util.List;
 
@@ -27,10 +28,22 @@ public class CustomCommand extends BukkitCommand {
         this.noPermissionError = noPermissionError;
     }
 
+    private boolean isCmdAlright(CustomCommand cmd, CommandSender sender) {
+        if (!sender.hasPermission(cmd.getPermission())) {
+            sender.sendMessage(cmd.getNoPermissionError());
+            return false;
+        } else if (!(sender instanceof Player) && !cmd.getCanSendConsole()) {
+            sender.sendMessage(cmd.getOnlyPlayerError());
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     @Override
     public boolean execute(CommandSender sender, String commandLabel, String[] args) {
 
-        if (!CommandsLib.isCmdAlright(this,sender)) {
+        if (!isCmdAlright(this,sender)) {
             return false;
         }
 
